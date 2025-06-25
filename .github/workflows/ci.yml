@@ -22,6 +22,7 @@ jobs:
         python -m pip install --upgrade pip  # Aktualizacja pip na najnowszą wersję
         pip install -r requirements.txt      # Instalacja bibliotek wymaganych przez aplikację
 
-     - name: Run tests
-      run: |
-        $env:PYTHONPATH="."            # Krok 4: uruchomienie testów z folderu tests/
+    - name: Run tests
+      run: |                         # Krok 4: ustawienie PYTHONPATH i uruchomienie testów
+        echo "PYTHONPATH=$Env:PYTHONPATH;." >> $Env:GITHUB_ENV  # Dodaje katalog główny do PYTHONPATH
+        pytest tests/                                            # Uruchamia testy jednostkowe
