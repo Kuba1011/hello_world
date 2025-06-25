@@ -22,7 +22,9 @@ jobs:
         python -m pip install --upgrade pip  # Aktualizacja pip na najnowszą wersję
         pip install -r requirements.txt      # Instalacja bibliotek wymaganych przez aplikację
 
-    - name: Run tests
-      run: |                         # Krok 4: ustawienie PYTHONPATH i uruchomienie testów
-        echo "PYTHONPATH=$Env:PYTHONPATH;." >> $Env:GITHUB_ENV  # Dodaje katalog główny do PYTHONPATH
-        pytest tests/                                            # Uruchamia testy jednostkowe
+     - name: Run tests
+      shell: pwsh                         # Krok 4: użycie PowerShell w środowisku Windows
+      run: |
+        $env:PYTHONPATH = "."             # Ustawia PYTHONPATH na katalog główny repozytorium
+        pytest tests/                     # Uruchamia testy jednostkowe z katalogu tests/
+
