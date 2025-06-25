@@ -1,0 +1,2 @@
+flask     # Framework webowy
+pytest    # Biblioteka do testów jednostkowych

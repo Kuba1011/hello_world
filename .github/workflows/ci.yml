@@ -1,0 +1,26 @@
+name: hello_world – Build & Test  # Nazwa workflowu, widoczna w zakładce "Actions" na GitHubie
+
+on:
+  push:                           # Uruchom workflow przy każdym pushu...
+    branches: [ main ]            # ...ale tylko jeśli dotyczy gałęzi 'main'
+  pull_request:                   # Uruchom także dla pull requestów skierowanych do 'main'
+
+jobs:
+  build-and-test:                 # Nazwa zadania (można mieć wiele zadań)
+    runs-on: windows-latest       # Środowisko uruchomieniowe (maszyna wirtualna z Windows Server)
+
+    steps:                        # Lista kroków do wykonania w ramach zadania
+    - uses: actions/checkout@v3   # Krok 1: pobranie kodu źródłowego z repozytorium
+
+    - name: Set up Python
+      uses: actions/setup-python@v4  # Krok 2: konfiguracja interpretera Python
+      with:
+        python-version: '3.11'       # Używana wersja Pythona
+
+    - name: Install dependencies
+      run: |                         # Krok 3: instalacja zależności z pliku requirements.txt
+        python -m pip install --upgrade pip  # Aktualizacja pip na najnowszą wersję
+        pip install -r requirements.txt      # Instalacja bibliotek wymaganych przez aplikację
+
+    - name: Run tests
+      run: pytest tests/             # Krok 4: uruchomienie testów z folderu tests/

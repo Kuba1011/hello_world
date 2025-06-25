@@ -1,0 +1,7 @@
+version: "3.9"
+
+services:
+  web:
+    build: .                     # Buduje obraz z lokalnego Dockerfile
+    ports:
+      - "5000:5000"              # Mapuje port kontenera na port lokalny
